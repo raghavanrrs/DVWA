@@ -5,7 +5,6 @@ pipeline {
         REGISTRY_URL = '192.168.146.133:5000'
         DOCKER_CREDENTIALS_ID = 'dockerRegistry'
         DEPLOY_PORT = '8081'
-        DEPLOY_NETWORK = 'uat_net'
     }
 
     options {
@@ -207,7 +206,8 @@ pipeline {
             steps {
                 script {
                     // Use the same Docker network your service runs on
-                    def network = env.DEPLOY_NETWORK ?: 'uat_net'
+                    def network = env.DEPLOY_NETWORK // e.g., 'uat_net' or 'prod_net'
+                    // Target service details
                     def targetHost = 'dvwa'       // service or container name
                     def targetPort = '80'          // internal container port
 

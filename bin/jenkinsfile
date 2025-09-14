@@ -72,7 +72,10 @@ pipeline {
                 withSonarQubeEnv('SonarQubeScanner') {  // must match SonarQube server config name in Jenkins
                     sh """
                         $SCANNER_HOME/bin/sonar-scanner \
-                        -Dsonar.sources=vulnerabilities/api
+                        -Dsonar.sources=vulnerabilities/api \
+                        -Dsonar.projectName='DVWA' \
+                        -Dsonar.projectKey=DVWA \
+                        -Dsonar.host.url=${env.SONAR_HOST_URL} \
                     """
                 }
             }
